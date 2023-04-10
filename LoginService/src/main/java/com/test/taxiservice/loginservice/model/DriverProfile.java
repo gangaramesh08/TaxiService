@@ -13,35 +13,33 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "DriverInfo")
-public class DriverInfo {
+@Entity(name = "DriverProfile")
+public class DriverProfile {
 
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @Column(name = "profileId")
+    private BigInteger profileId;
+
     @Column(name = "driverId")
-    BigInteger driverId;
+
+    private BigInteger driverId;
     @Column(name = "firstName")
-    String firstName;
+    private String firstName;
 
     @Column(name = "lastName")
-    String lastName;
+    private String lastName;
 
     @Column(name = "age")
-    int age;
-
-    @Column(name = "phoneNumber")
-    String phoneNumber;
-
-    @Column(name = "password")
-    String password;
+    private int age;
 
     @Column(name = "createdAt")
-    Date createdAt;
+    private Date createdAt;
 
     @Column(name = "modifiedAt")
-    Date modifiedAt;
+    private Date modifiedAt;
 
-    String email;
+    private String email;
 
 }

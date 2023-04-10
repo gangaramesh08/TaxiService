@@ -5,8 +5,8 @@ import com.test.taxiservice.loginservice.constants.ResponseConstants;
 import com.test.taxiservice.loginservice.exceptions.ErrorDetails;
 import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
 import com.test.taxiservice.loginservice.exceptions.ErrorResponse;
-import com.test.taxiservice.loginservice.model.DriverInfo;
-import com.test.taxiservice.loginservice.repository.DriverInfoRepository;
+import com.test.taxiservice.loginservice.model.SignUpInfo;
+import com.test.taxiservice.loginservice.repository.DriverCredentialsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,15 +21,15 @@ import static com.test.taxiservice.loginservice.constants.Constants.*;
 public class DriverInfoValidator {
 
     @Autowired
-    private DriverInfoRepository repository;
+    private DriverCredentialsRepository credentialsRepository;
 
-    public ErrorInfo validateDriverDetails(DriverInfo driverInfo) {
+    public ErrorInfo validateDriverDetails(SignUpInfo signUpInfo) {
         ErrorResponse errorResponse = new ErrorResponse();
         ErrorInfo error = new ErrorInfo();
         error.setDetails(new ArrayList<>());
         errorResponse.setError(error);
-        if(Objects.isNull(driverInfo)) {
-            log.error("Driver Information is NULL");
+        if(Objects.isNull(signUpInfo)) {
+            log.error("Driver Information is EMPTY");
             error
                     .addDetailsItem(
                             createErrorDetails(
@@ -38,32 +38,32 @@ public class DriverInfoValidator {
             error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_NO_DATA);
             return error;
         } else{
-            addErrorForInvalidName(driverInfo.getFirstName(), FIRST_NAME, error);
-            addErrorForInvalidName(driverInfo.getLastName(), LAST_NAME, error);
-            addErrorForDuplicatePhoneNumber(driverInfo.getPhoneNumber(), PHONE_NUMBER, error);
+            addErrorForInvalidName(signUpInfo.getFirstName(), FIRST_NAME, error);
+            addErrorForInvalidName(signUpInfo.getLastName(), LAST_NAME, error);
+            addErrorForDuplicateMobileNumber(signUpInfo.getMobileNumber(), MOBILE_NUMBER, error);
         }
         return error;
     }
 
-    private void addErrorForDuplicatePhoneNumber(String phoneNumber, String paramName, ErrorInfo error) {
+    private void addErrorForDuplicateMobileNumber(String mobileNumber, String paramName, ErrorInfo error) {
 
-        if(Objects.isNull(phoneNumber) || (!phoneNumber.matches(PHONENUMBER_REGEX))) {
+        if(Objects.isNull(mobileNumber) || (!mobileNumber.matches(MOBILENUMBER_REGEX))) {
             error
                     .addDetailsItem(
                             createErrorDetails(
-                                    ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_PHONE_NUMBER,
+                                    ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_MOBILE_NUMBER,
                                     String.format(MessageConstants.INVALID_VALUE, paramName)
                             )
                     );
-            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_PHONE_NUMBER);
-        } else if(!Objects.isNull(repository.getByPhoneNumber(phoneNumber))){
+            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_MOBILE_NUMBER);
+        } else if(!Objects.isNull(credentialsRepository.getByMobileNumber(mobileNumber))){
             log.error("Duplicate Mobile Number identified");
             error
                     .addDetailsItem(
                             createErrorDetails(
-                                    ResponseConstants.CODE_ERROR_BADREQUEST_DUPLICATE_PHONE_NUMBER,
-                                    MessageConstants.DUPLICATE_PHONENUMBER));
-            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_DUPLICATE_PHONE_NUMBER);
+                                    ResponseConstants.CODE_ERROR_BADREQUEST_DUPLICATE_MOBILE_NUMBER,
+                                    MessageConstants.DUPLICATE_MOBILENUMBER));
+            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_DUPLICATE_MOBILE_NUMBER);
         }
     }
 
