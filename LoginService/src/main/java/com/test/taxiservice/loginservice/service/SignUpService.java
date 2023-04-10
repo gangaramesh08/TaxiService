@@ -12,7 +12,7 @@ import com.test.taxiservice.loginservice.repository.DriverProfileRepository;
 import com.test.taxiservice.loginservice.utils.DriverInfoValidator;
 import com.test.taxiservice.loginservice.utils.OtpGeneratorUtil;
 import com.test.taxiservice.loginservice.utils.PasswordEncryptionUtil;
-import com.test.taxiservice.taxiservicecommon.model.DriverSignUpOTPModel;
+import com.test.taxiservice.taxiservicecommon.model.DriverSignUpOTP;
 import com.test.taxiservice.taxiservicecommon.repository.DriverSignUpOTPRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +62,10 @@ public class SignUpService implements ISignUpService {
             driverProfile.setLastName(signUpInfo.getLastName());
             profileRepository.save(driverProfile);
 
-            DriverSignUpOTPModel driverSignUpOTPModel = new DriverSignUpOTPModel(
+            DriverSignUpOTP driverSignUpOTP = new DriverSignUpOTP(
                     credentials.getMobileNumber(),
                     otp);
-            driverSignUpOTPRepository.save(driverSignUpOTPModel);
+            driverSignUpOTPRepository.save(driverSignUpOTP);
 
 
         } catch (Exception exception) {
@@ -91,18 +91,18 @@ public class SignUpService implements ISignUpService {
     @Override
     public boolean validateOTP(String mobileNumber, Integer otp) {
 
-        Optional<DriverSignUpOTPModel> otpForMobileNumber = driverSignUpOTPRepository.findById(mobileNumber);
-        return otpForMobileNumber.filter(driverSignUpOTPModel -> otp.equals(driverSignUpOTPModel.getOtp())).isPresent();
+        Optional<DriverSignUpOTP> otpForMobileNumber = driverSignUpOTPRepository.findById(mobileNumber);
+        return otpForMobileNumber.filter(driverSignUpOTP -> otp.equals(driverSignUpOTP.getOtp())).isPresent();
     }
 
     @Override
     public Integer regenerateOTP(String mobileNumber) {
         Integer otp = OtpGeneratorUtil.generateOtp();
 
-        DriverSignUpOTPModel driverSignUpOTPModel = new DriverSignUpOTPModel(
+        DriverSignUpOTP driverSignUpOTP = new DriverSignUpOTP(
                 mobileNumber,
                 otp);
-        driverSignUpOTPRepository.save(driverSignUpOTPModel);
+        driverSignUpOTPRepository.save(driverSignUpOTP);
         return otp;
     }
 

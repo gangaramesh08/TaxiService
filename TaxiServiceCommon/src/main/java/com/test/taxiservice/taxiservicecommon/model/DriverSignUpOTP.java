@@ -10,7 +10,7 @@ import java.io.Serializable;
 @RedisHash(value="DriverSignUpOTP", timeToLive = 60L)
 @AllArgsConstructor
 @Data
-public class DriverSignUpOTPModel implements Serializable {
+public class DriverSignUpOTP implements Serializable {
     @Id
     private String mobileNumber;
     private Integer otp;
