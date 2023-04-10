@@ -30,4 +30,19 @@ public interface ISignUpService {
      * @throws InvalidInputException thrown when data entered is not valid
      */
     void validate(SignUpInfo signUpInfo) throws InvalidInputException;
+
+    /**
+     * This method validates the OTP entered by the driver. The OTP is valid only for 60 seconds
+     * @param mobileNumber
+     * @param otp
+     * @return
+     */
+    boolean validateOTP(String mobileNumber, Integer otp);
+
+    /**
+     * This method regenerates the OTP for the driver.
+     * @param mobileNumber
+     * @return
+     */
+    Integer regenerateOTP(String mobileNumber);
 }

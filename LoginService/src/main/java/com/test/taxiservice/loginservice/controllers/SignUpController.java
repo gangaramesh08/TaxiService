@@ -8,8 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Apis to perform signUp of drivers for the Taxi Service
@@ -33,5 +35,27 @@ public class SignUpController {
        signUpService.validate(signUpInfo);
        Integer otp  = signUpService.signUp(signUpInfo);
        return ResponseEntity.ok(otp);
+    }
+
+    /**
+     * API used for validating the OTP entered by the driver.
+     * @param mobileNumber
+     * @param otp
+     * @return
+     */
+    @GetMapping(value = "/validateOTP")
+    public ResponseEntity<Boolean> validateOTP(@RequestParam String mobileNumber, @RequestParam Integer otp){
+        return ResponseEntity.ok(signUpService.validateOTP(mobileNumber,otp));
+    }
+
+    /**
+     * API used for regenerating the OTP for a given driver mobile Number
+     * @param mobileNumber
+     * @return
+     */
+    @GetMapping(value = "/regenerateOTP")
+    public ResponseEntity<Integer> validateOTP(@RequestParam String mobileNumber){
+        Integer otp = signUpService.regenerateOTP(mobileNumber);
+        return ResponseEntity.ok(otp);
     }
 }

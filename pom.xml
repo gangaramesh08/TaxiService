@@ -17,6 +17,8 @@
         <version>2.2.2.RELEASE</version>
     </parent>
     <modules>
+
+        <module>TaxiServiceCommon</module>
         <module>LoginService</module>
         <module>DocumentService</module>
     </modules>

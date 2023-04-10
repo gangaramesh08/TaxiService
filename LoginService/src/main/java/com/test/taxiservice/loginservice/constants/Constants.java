@@ -2,8 +2,7 @@ package com.test.taxiservice.loginservice.constants;
 
 public class Constants {
 
-    public static final String BASE_PACKAGE = "com.test.taxiservice.loginservice";
-
+    public static final String BASE_PACKAGE = "com.test.taxiservice";
     public static final String NAME_REGEX = "^[a-zA-Z\\\\s]+";
     public static final String MOBILENUMBER_REGEX = "^[1-9][0-9]{9}$";
 
