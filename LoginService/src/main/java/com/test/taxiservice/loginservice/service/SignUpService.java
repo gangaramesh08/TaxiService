@@ -4,20 +4,23 @@ import com.test.taxiservice.loginservice.constants.MessageConstants;
 import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
 import com.test.taxiservice.loginservice.exceptions.InvalidInputException;
 import com.test.taxiservice.loginservice.exceptions.PersistenceException;
-import com.test.taxiservice.loginservice.model.DriverCredentials;
-import com.test.taxiservice.loginservice.model.DriverProfile;
-import com.test.taxiservice.loginservice.model.SignUpInfo;
 import com.test.taxiservice.loginservice.repository.DriverCredentialsRepository;
 import com.test.taxiservice.loginservice.repository.DriverProfileRepository;
 import com.test.taxiservice.loginservice.utils.DriverInfoValidator;
 import com.test.taxiservice.loginservice.utils.OtpGeneratorUtil;
-import com.test.taxiservice.loginservice.utils.PasswordEncryptionUtil;
+import com.test.taxiservice.taxiservicecommon.model.DriverMobileId;
 import com.test.taxiservice.taxiservicecommon.model.DriverSignUpOTP;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverCredentials;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfile;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.SignUpInfo;
+import com.test.taxiservice.taxiservicecommon.repository.DriverAccessTokenRepository;
+import com.test.taxiservice.taxiservicecommon.repository.DriverMobileIdRepository;
 import com.test.taxiservice.taxiservicecommon.repository.DriverSignUpOTPRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -34,9 +37,15 @@ public class SignUpService implements ISignUpService {
     @Autowired
     private DriverCredentialsRepository credentialsRepository;
 
+    @Autowired
+    private DriverMobileIdRepository driverMobileIdRepository;
+
 
     @Autowired
     private DriverSignUpOTPRepository driverSignUpOTPRepository;
+
+    @Autowired
+    DriverAccessTokenRepository driverAccessTokenRepository;
 
     @Autowired
     private DriverInfoValidator validator;
@@ -46,13 +55,15 @@ public class SignUpService implements ISignUpService {
         Integer otp = OtpGeneratorUtil.generateOtp();
 
         try {
+
             DriverCredentials credentials = new DriverCredentials();
             credentials.setMobileNumber(signUpInfo.getMobileNumber());
-            credentials.setPassword(PasswordEncryptionUtil.getEncryptedPassword(signUpInfo.getPassword()));
+            credentials.setPassword(Base64.getEncoder().encodeToString(signUpInfo.getPassword().getBytes()));
             credentials.setCreatedAt(new Date());
             credentials.setModifiedAt(credentials.getCreatedAt());
             credentialsRepository.save(credentials);
 
+            driverMobileIdRepository.save(new DriverMobileId(credentials.getMobileNumber(), credentials.getDriverId()));
 
             DriverProfile driverProfile = new DriverProfile();
             driverProfile.setDriverId(credentials.getDriverId());

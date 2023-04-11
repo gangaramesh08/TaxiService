@@ -2,21 +2,20 @@ package com.test.taxiservice.loginservice.controllers;
 
 import com.test.taxiservice.loginservice.exceptions.InvalidInputException;
 import com.test.taxiservice.loginservice.exceptions.PersistenceException;
-import com.test.taxiservice.loginservice.model.SignUpInfo;
 import com.test.taxiservice.loginservice.service.ISignUpService;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.SignUpInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import static com.test.taxiservice.loginservice.constants.Constants.*;
 
 /**
  * Apis to perform signUp of drivers for the Taxi Service
  */
 @RestController
+@RequestMapping(LOGINSERVICE_API_URL)
 @Slf4j
 public class SignUpController {
 
@@ -30,7 +29,7 @@ public class SignUpController {
      * @throws InvalidInputException when invalid data is provided exception is thrown
      */
 
-    @PostMapping(value = "/signup")
+    @PostMapping(value = SIGNUP_API_URL)
     public ResponseEntity<Integer> signUp(@RequestBody SignUpInfo signUpInfo) throws InvalidInputException, PersistenceException {
        signUpService.validate(signUpInfo);
        Integer otp  = signUpService.signUp(signUpInfo);
@@ -43,7 +42,7 @@ public class SignUpController {
      * @param otp
      * @return
      */
-    @GetMapping(value = "/validateOTP")
+    @GetMapping(value = VALIDATE_OTP_API_URL)
     public ResponseEntity<Boolean> validateOTP(@RequestParam String mobileNumber, @RequestParam Integer otp){
         return ResponseEntity.ok(signUpService.validateOTP(mobileNumber,otp));
     }
@@ -53,7 +52,7 @@ public class SignUpController {
      * @param mobileNumber
      * @return
      */
-    @GetMapping(value = "/regenerateOTP")
+    @GetMapping(value = REGENERATE_OTP_API_URL)
     public ResponseEntity<Integer> validateOTP(@RequestParam String mobileNumber){
         Integer otp = signUpService.regenerateOTP(mobileNumber);
         return ResponseEntity.ok(otp);
