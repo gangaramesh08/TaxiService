@@ -1,7 +1,5 @@
 package com.test.taxiservice.loginservice.repository;
-
-import com.test.taxiservice.loginservice.model.DriverCredentials;
-import com.test.taxiservice.loginservice.model.DriverProfile;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverCredentials;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,5 +14,5 @@ public interface DriverCredentialsRepository extends JpaRepository<DriverCredent
 
 
     @Query(value = "Select * from driver_credentials dI where dI.mobile_number = ?1 and dI.password = ?2", nativeQuery = true)
-    DriverProfile getByMobileNumberAndPassword(String mobileNumber, String password);
+    DriverCredentials getByMobileNumberAndPassword(String mobileNumber, String password);
 }

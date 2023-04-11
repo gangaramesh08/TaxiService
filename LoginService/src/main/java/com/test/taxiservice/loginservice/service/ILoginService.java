@@ -2,6 +2,7 @@ package com.test.taxiservice.loginservice.service;
 
 import com.test.taxiservice.loginservice.exceptions.InvalidInputException;
 import com.test.taxiservice.loginservice.exceptions.PersistenceException;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverCredentials;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,4 +17,5 @@ public interface ILoginService {
      */
     void validateLogin(String mobileNumber, String password) throws InvalidInputException, PersistenceException;
 
+    String login(DriverCredentials driverCredentials);
 }

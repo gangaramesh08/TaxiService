@@ -7,12 +7,13 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 
-@RedisHash(value="DriverSignUpOTP", timeToLive = 60L)
+@RedisHash(value="DriverAccessToken")
 @AllArgsConstructor
 @Data
-public class DriverSignUpOTPModel implements Serializable {
+public class DriverAccessToken implements Serializable {
     @Id
     private String mobileNumber;
-    private Integer otp;
+    private String token;
 
+    private long expiry;
 }

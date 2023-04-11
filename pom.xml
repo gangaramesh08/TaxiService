@@ -21,6 +21,7 @@
         <module>TaxiServiceCommon</module>
         <module>LoginService</module>
         <module>DocumentService</module>
+        <module>TaxiServiceAPIGateway</module>
     </modules>
 
     <properties>
