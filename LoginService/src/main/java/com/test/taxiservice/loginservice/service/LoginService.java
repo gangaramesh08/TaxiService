@@ -1,12 +1,12 @@
 package com.test.taxiservice.loginservice.service;
 
-import com.test.taxiservice.loginservice.constants.MessageConstants;
-import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
-import com.test.taxiservice.loginservice.exceptions.InvalidInputException;
-import com.test.taxiservice.loginservice.exceptions.PersistenceException;
+import com.test.taxiservice.taxiservicecommon.common.MessageConstants;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
+import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.loginservice.repository.DriverCredentialsRepository;
 import com.test.taxiservice.taxiservicecommon.model.DriverAccessToken;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverCredentials;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverCredentials;
 import com.test.taxiservice.taxiservicecommon.repository.DriverAccessTokenRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,7 +21,7 @@ import java.util.Objects;
 
 import static com.test.taxiservice.loginservice.constants.Constants.BEARER;
 import static com.test.taxiservice.loginservice.constants.Constants.EXPIRY_DURATION;
-import static com.test.taxiservice.loginservice.constants.ResponseConstants.CODE_ERROR_PERSISTENCE_ERROR;
+import static com.test.taxiservice.taxiservicecommon.common.ResponseConstants.CODE_ERROR_PERSISTENCE_ERROR;
 
 @Service
 @Slf4j

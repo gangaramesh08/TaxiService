@@ -1,9 +1,9 @@
 package com.test.taxiservice.loginservice.controllers;
 
-import com.test.taxiservice.loginservice.exceptions.InvalidInputException;
-import com.test.taxiservice.loginservice.exceptions.PersistenceException;
+import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
+import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.loginservice.service.ILoginService;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverCredentials;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverCredentials;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

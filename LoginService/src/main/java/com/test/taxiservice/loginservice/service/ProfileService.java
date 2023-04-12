@@ -1,13 +1,13 @@
 package com.test.taxiservice.loginservice.service;
 
-import com.test.taxiservice.loginservice.constants.MessageConstants;
-import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
-import com.test.taxiservice.loginservice.exceptions.PersistenceException;
+import com.test.taxiservice.taxiservicecommon.common.MessageConstants;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.loginservice.repository.DriverProfileRepository;
 import com.test.taxiservice.loginservice.utils.DriverInfoValidator;
 import com.test.taxiservice.loginservice.utils.NullAwareBeanUtilsBean;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfile;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfileUpdate;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfileUpdate;
 import com.test.taxiservice.taxiservicecommon.repository.DriverMobileIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigInteger;
 import java.util.Date;
 
-import static com.test.taxiservice.loginservice.constants.ResponseConstants.CODE_ERROR_PERSISTENCE_ERROR;
+import static com.test.taxiservice.taxiservicecommon.common.ResponseConstants.CODE_ERROR_PERSISTENCE_ERROR;
 
 @Service
 @Slf4j

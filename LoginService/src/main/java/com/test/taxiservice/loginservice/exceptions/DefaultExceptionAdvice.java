@@ -2,8 +2,11 @@ package com.test.taxiservice.loginservice.exceptions;
 
 
 import com.test.taxiservice.loginservice.config.HeaderInfo;
-import com.test.taxiservice.loginservice.constants.ResponseConstants;
+import com.test.taxiservice.taxiservicecommon.common.ResponseConstants;
 import com.test.taxiservice.loginservice.utils.ErrorUtils;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
+import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

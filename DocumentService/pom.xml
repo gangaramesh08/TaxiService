@@ -11,5 +11,23 @@
   <artifactId>DocumentService</artifactId>
   <packaging>jar</packaging>
 
+  <dependencies>
+  <dependency>
+    <groupId>com.test.taxiservice</groupId>
+    <artifactId>TaxiServiceCommon</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </dependency>
+  </dependencies>
+
   <name>DocumentService</name>
+
+  <build>
+    <plugins>
+      <!-- SPRING BOOT PLUGIN -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>

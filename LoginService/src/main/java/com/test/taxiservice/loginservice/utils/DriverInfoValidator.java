@@ -1,13 +1,12 @@
 package com.test.taxiservice.loginservice.utils;
 
-import com.test.taxiservice.loginservice.constants.MessageConstants;
-import com.test.taxiservice.loginservice.constants.ResponseConstants;
-import com.test.taxiservice.loginservice.exceptions.ErrorDetails;
-import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
-import com.test.taxiservice.loginservice.exceptions.ErrorResponse;
+import com.test.taxiservice.taxiservicecommon.common.MessageConstants;
+import com.test.taxiservice.taxiservicecommon.common.ResponseConstants;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorDetails;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorResponse;
 import com.test.taxiservice.loginservice.repository.DriverCredentialsRepository;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfile;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.SignUpInfo;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.SignUpInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

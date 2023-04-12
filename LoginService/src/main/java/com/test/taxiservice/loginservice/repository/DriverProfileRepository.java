@@ -1,6 +1,6 @@
 package com.test.taxiservice.loginservice.repository;
 
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfile;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
