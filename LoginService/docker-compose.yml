@@ -1,0 +1,47 @@
+version: "3.0"
+
+services:
+
+  redis-common:
+    image: 'redis'
+    container_name: "redis-common"
+    ports:
+      - "6379:6379"
+    networks:
+      - default
+      - taxi
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    restart: unless-stopped
+    volumes:
+      - redis-data:/usr/local/etc/redis.conf
+
+  login-service:
+    container_name: login-service
+    restart: on-failure
+    build: ./
+    networks:
+      - default
+      - taxi
+    expose:
+      - "8081"
+    ports:
+      - 8081:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-mysql:3306/TaxiService?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6379
+      REDIS_PASSWORD:
+    external_links:
+      - db-mysql
+      - redis-common
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  default:
+    external:
+      name: external-network
+  taxi:
+    driver: bridge

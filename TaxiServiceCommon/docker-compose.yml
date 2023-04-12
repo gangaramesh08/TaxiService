@@ -1,0 +1,29 @@
+
+version: "3.0"
+
+services:
+
+  db-mysql:
+    restart: always
+    container_name: db-mysql
+    image: mysql
+    networks: [default]
+    volumes:
+      - ./mysql_init/docker.sql:/mysql_init/docker.sql
+      - ./sql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: TaxiService
+      MYSQL_ROOT_PASSWORD: password
+    command: mysqld --init-file="/mysql_init/docker.sql"
+    ports:
+      - "3307:3306"
+
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  default:
+    external:
+      name: external-network

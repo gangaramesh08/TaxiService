@@ -12,6 +12,7 @@ public class Constants {
 
     public static final String LOGINSERVICE_API_URL = "/loginservice";
     public static final String LOGIN_API_URL = "/login";
+    public static final String LOGIN_HEALTH_CHECK_URL = "/healthcheck";
     public static final String SIGNUP_API_URL = "/signup";
     public static final String VALIDATE_OTP_API_URL = "/validateOTP";
     public static final String REGENERATE_OTP_API_URL = "/regenerateOTP";
