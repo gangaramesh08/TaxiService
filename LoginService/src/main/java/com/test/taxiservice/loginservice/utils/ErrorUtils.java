@@ -1,6 +1,6 @@
 package com.test.taxiservice.loginservice.utils;
 
-import com.test.taxiservice.loginservice.exceptions.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
 
 
 public class ErrorUtils {

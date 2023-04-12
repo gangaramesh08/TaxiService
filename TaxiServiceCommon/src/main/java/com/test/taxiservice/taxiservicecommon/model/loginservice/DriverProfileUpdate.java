@@ -1,19 +1,23 @@
-package com.test.taxiservice.taxiservicecommon.model.loginservice.model;
+package com.test.taxiservice.taxiservicecommon.model.loginservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpInfo {
-
+public class DriverProfileUpdate {
     private String mobileNumber;
-
-    private String password;
-
     private String firstName;
 
     private String lastName;
+
+    private int age;
+
+    private Date modifiedAt;
+
+    private String email;
 }

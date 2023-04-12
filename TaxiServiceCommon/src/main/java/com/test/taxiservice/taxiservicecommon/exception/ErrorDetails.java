@@ -1,4 +1,4 @@
-package com.test.taxiservice.loginservice.exceptions;
+package com.test.taxiservice.taxiservicecommon.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

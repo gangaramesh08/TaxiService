@@ -1,4 +1,4 @@
-package com.test.taxiservice.taxiservicecommon.model.loginservice.model;
+package com.test.taxiservice.taxiservicecommon.model.loginservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

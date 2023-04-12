@@ -2,10 +2,9 @@ package com.test.taxiservice.loginservice.utils;
 
 import java.lang.reflect.InvocationTargetException;
 
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfile;
-import com.test.taxiservice.taxiservicecommon.model.loginservice.model.DriverProfileUpdate;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
+import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfileUpdate;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.stereotype.Component;
 
