@@ -1,20 +1,20 @@
-package com.test.taxiservice.loginservice.exceptions;
+package com.test.taxiservice.documentservice.exception;
 
 
-import com.test.taxiservice.loginservice.config.HeaderInfo;
+import com.test.taxiservice.documentservice.common.HeaderInfo;
 import com.test.taxiservice.taxiservicecommon.common.ResponseConstants;
-import com.test.taxiservice.taxiservicecommon.exception.ErrorUtils;
 import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
+import com.test.taxiservice.taxiservicecommon.exception.ErrorUtils;
 import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import javax.inject.Provider;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 
 /**

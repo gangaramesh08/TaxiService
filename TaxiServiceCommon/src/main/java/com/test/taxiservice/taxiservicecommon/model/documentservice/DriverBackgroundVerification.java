@@ -11,26 +11,19 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "DriverDocuments")
-public class DriverDocuments {
+@Entity(name = "DriverBackgroundVerification")
+public class DriverBackgroundVerification {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    @Column(name = "documentId")
-
-    private BigInteger documentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "verificationId")
+    private BigInteger verificationId;
 
     @Column(name = "driverId")
     private BigInteger driverId;
 
-    @Column(name = "docName")
-    private String docName;
-
-    @Column(name = "docType")
-    private String docType;
-
-    @Column(name = "storageLink")
-    private String storageLink;
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "createdAt")
     private Date createdAt;
