@@ -2,7 +2,7 @@ package com.test.taxiservice.documentservice.model;
 
 public enum DocumentStorageType {
     LOCAL("LOCAL"),
-    AWS("AWS");
+    S3("S3");
 
     private String value;
 

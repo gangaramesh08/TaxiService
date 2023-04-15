@@ -24,12 +24,16 @@ public class DriverDocServiceController {
     IDriverDocService driverDocService;
 
     /**
+     * POST
+     * /driver/documentservice/update :
      * This API is used to upload documents of the driver.
      * Currently, support upload of PAN_CARD, AADHAR_CARD and DRIVING_LICENCE
-     * @param file
-     * @param driverId
-     * @param documentType
-     * @return
+     * @param file The document to be uploaded
+     * @param driverId Id that uniquely identifies the driver
+     * @param documentType Type of document that needs to be uploaded. Currently
+     *                     only PAN_CARD, AADHAR_CARD and DRIVING_LICENCE are supported documentTypes.
+     * @return Success message if documents are uploaded successfully( status code 200)
+     * Or Bade request(400) if required data is not provided.
      * @throws InvalidInputException
      * @throws PersistenceException
      */
@@ -38,7 +42,7 @@ public class DriverDocServiceController {
             @RequestParam(name = "file", required = false) MultipartFile file,
             @RequestParam BigInteger driverId,
             @RequestParam String documentType) throws InvalidInputException, PersistenceException {
-        driverDocService.validateDocuments(driverId,DocumentType.valueOf(documentType),file);
+        driverDocService.validateDocuments(driverId, documentType,file);
         driverDocService.save(driverId, DocumentType.valueOf(documentType), file);
         return ResponseEntity.ok(SUCCESS);
     }

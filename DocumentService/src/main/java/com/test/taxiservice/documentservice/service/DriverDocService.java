@@ -37,9 +37,10 @@ public class DriverDocService implements IDriverDocService {
 
 
     @Override
-    public void validateDocuments(BigInteger driverId, DocumentType documentType, MultipartFile multipartFile) throws InvalidInputException {
-        ErrorInfo validationError = validator.validateDriverDetails( multipartFile);
+    public void validateDocuments(BigInteger driverId, String documentType, MultipartFile multipartFile) throws InvalidInputException {
+        ErrorInfo validationError = validator.validateDriverDetails( multipartFile, documentType);
         if( !validationError.getDetails().isEmpty() ) {
+            log.error("Invalid details provided in the request for driverId : {}, docType : {}", driverId, documentType);
             validationError.setMessage(MessageConstants.INVALID_DRIVER_INFO);
             validationError.getDetails().forEach(errorDetails -> log.error(errorDetails.getMessage()));
             throw new InvalidInputException(validationError);
@@ -60,15 +61,27 @@ public class DriverDocService implements IDriverDocService {
             driverDocuments.setStorageLink(documentStorageService.storeFile(driverDocuments, file));
             log.info("Successfully stored the file for driverId : {}  in location : {}",
                     driverDocuments.getDriverId(), driverDocuments.getStorageLink());
+            BigInteger documentId = documentAlreadyExists(driverId, documentType.getValue());
+            if(documentId!=null) {
+                driverDocuments.setDocumentId(documentId);
+                log.info("Updated the document for driverId : {}, docType : {}",driverId, documentType);
+
+            }
+
             driverDocumentsRepository.save(driverDocuments);
 
+
         } catch (Exception exception) {
-            log.error("Exception occurred while fetching driver information from database");
+            log.error("Exception occurred while fetching driver information from database for driverId :{}", driverId);
             ErrorInfo validationError = ErrorInfo.builder()
                     .message(MessageConstants.PERSISTENCE_ERROR)
                     .code(CODE_ERROR_PERSISTENCE_ERROR).build();
             throw new PersistenceException(validationError);
         }
 
+    }
+
+    private BigInteger documentAlreadyExists(BigInteger driverId, String documentType) {
+        return driverDocumentsRepository.findByDocumentType(driverId, documentType);
     }
 }

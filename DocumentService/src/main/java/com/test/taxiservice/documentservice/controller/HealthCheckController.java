@@ -11,6 +11,11 @@ import static com.test.taxiservice.documentservice.common.Constants.*;
 @RequestMapping(DOCUMENT_SERVICE_BASE_URL)
 public class HealthCheckController {
 
+    /**
+     * GET
+     * /driver/documentservice/healthcheck
+     * @return Success message if the application is up.
+     */
     @GetMapping(HEALTH_CHECK_URL)
     public String healthCheck() {
         return SUCCESS;

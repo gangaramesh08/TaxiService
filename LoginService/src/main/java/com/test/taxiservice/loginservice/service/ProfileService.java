@@ -54,4 +54,11 @@ public class ProfileService implements IProfileService {
             throw new PersistenceException(validationError);
         }
     }
+
+    @Override
+    public void addProfile(DriverProfile driverProfile) {
+        driverProfileRepository.save(driverProfile);
+    }
+
+
 }

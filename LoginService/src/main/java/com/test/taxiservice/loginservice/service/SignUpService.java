@@ -5,7 +5,6 @@ import com.test.taxiservice.taxiservicecommon.exception.ErrorInfo;
 import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.loginservice.repository.DriverCredentialsRepository;
-import com.test.taxiservice.loginservice.repository.DriverProfileRepository;
 import com.test.taxiservice.loginservice.utils.DriverInfoValidator;
 import com.test.taxiservice.loginservice.utils.OtpGeneratorUtil;
 import com.test.taxiservice.taxiservicecommon.model.DriverMobileId;
@@ -32,9 +31,6 @@ import static com.test.taxiservice.taxiservicecommon.common.ResponseConstants.CO
 public class SignUpService implements ISignUpService {
 
     @Autowired
-    private DriverProfileRepository profileRepository;
-
-    @Autowired
     private DriverCredentialsRepository credentialsRepository;
 
     @Autowired
@@ -46,6 +42,9 @@ public class SignUpService implements ISignUpService {
 
     @Autowired
     DriverAccessTokenRepository driverAccessTokenRepository;
+
+    @Autowired
+    private IProfileService profileService;
 
     @Autowired
     private DriverInfoValidator validator;
@@ -71,7 +70,7 @@ public class SignUpService implements ISignUpService {
             driverProfile.setModifiedAt(driverProfile.getCreatedAt());
             driverProfile.setFirstName(signUpInfo.getFirstName());
             driverProfile.setLastName(signUpInfo.getLastName());
-            profileRepository.save(driverProfile);
+            profileService.addProfile(driverProfile);
 
             DriverSignUpOTP driverSignUpOTP = new DriverSignUpOTP(
                     credentials.getMobileNumber(),

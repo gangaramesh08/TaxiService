@@ -18,7 +18,7 @@ public interface IDriverDocService {
      * @param file
      * @throws InvalidInputException
      */
-    void validateDocuments(BigInteger driverId, DocumentType documentType, MultipartFile file) throws InvalidInputException;
+    void validateDocuments(BigInteger driverId, String documentType, MultipartFile file) throws InvalidInputException;
 
     /**
      * This method uploads the documents to a storage location and saves the

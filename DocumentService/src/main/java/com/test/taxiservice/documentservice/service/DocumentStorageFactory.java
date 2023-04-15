@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+
 @Component
 public class DocumentStorageFactory {
 
@@ -12,14 +13,14 @@ public class DocumentStorageFactory {
     private LocalDocumentStorageService localDocumentStorageService;
 
     @Autowired
-    private AWSDocumentStorageService awsDocumentStorageService;
+    private S3DocumentStorageService s3DocumentStorageService;
 
     public IDocumentStorageService getStorageStrategy(String documentStorageType) {
         DocumentStorageType type = DocumentStorageType.valueOf(documentStorageType);
 
         switch (type) {
             case LOCAL: return localDocumentStorageService;
-            case AWS : return awsDocumentStorageService;
+            case S3 : return s3DocumentStorageService;
             default: return null;
         }
     }
