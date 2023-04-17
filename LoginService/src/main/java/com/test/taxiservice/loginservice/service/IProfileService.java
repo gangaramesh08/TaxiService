@@ -1,5 +1,6 @@
 package com.test.taxiservice.loginservice.service;
 
+import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfileUpdate;
@@ -10,4 +11,7 @@ public interface IProfileService {
     void updateProfile(DriverProfileUpdate driverProfileUpdate) throws PersistenceException;
 
     void addProfile(DriverProfile driverProfile);
+
+    void validateProfile(DriverProfileUpdate driverProfileUpdate) throws InvalidInputException;
+
 }

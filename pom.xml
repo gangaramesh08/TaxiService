@@ -22,6 +22,7 @@
         <module>LoginService</module>
         <module>DocumentService</module>
         <module>TaxiServiceAPIGateway</module>
+        <module>DriverTrackingService</module>
     </modules>
 
     <properties>

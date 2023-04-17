@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfileUpdate;
+import com.test.taxiservice.taxiservicecommon.model.trackingservice.DriverAddress;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,20 @@ public class NullAwareBeanUtilsBean{
                 .forEach(e -> {
                     try {
                         PropertyUtils.setProperty(anotherParent, e.getKey(), e.getValue());
+                    } catch (Exception exception) {
+                        log.error("Exception occurred in copying properties");
+                    }
+                });
+    }
+
+    public void copyAddressProperty(DriverProfileUpdate parent, DriverAddress driverAddress)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        PropertyUtils.describe(parent).entrySet().stream()
+                .filter(e -> e.getValue() != null)
+                .filter(e -> e.getKey().equals("addressList"))
+                .forEach(e -> {
+                    try {
+                        PropertyUtils.setProperty(driverAddress, e.getKey(), e.getValue());
                     } catch (Exception exception) {
                         log.error("Exception occurred in copying properties");
                     }

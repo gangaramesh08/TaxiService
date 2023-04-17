@@ -10,4 +10,9 @@ public interface DriverStatusRepository extends CrudRepository<DriverStatus, Big
 
     @Query(value = "Select ds.status from driver_status ds where driver_id = ?1", nativeQuery = true)
     String findDriverStatusById(BigInteger driverId);
+
+    @Query(value = "Select * from driver_status ds where driver_id = ?1", nativeQuery = true)
+
+    DriverStatus findByDriverId(BigInteger driverId);
+
 }

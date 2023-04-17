@@ -9,12 +9,14 @@ import com.test.taxiservice.loginservice.utils.DriverInfoValidator;
 import com.test.taxiservice.loginservice.utils.OtpGeneratorUtil;
 import com.test.taxiservice.taxiservicecommon.model.DriverMobileId;
 import com.test.taxiservice.taxiservicecommon.model.DriverSignUpOTP;
+import com.test.taxiservice.taxiservicecommon.model.documentservice.DriverStatusEnum;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverCredentials;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfile;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.SignUpInfo;
 import com.test.taxiservice.taxiservicecommon.repository.DriverAccessTokenRepository;
 import com.test.taxiservice.taxiservicecommon.repository.DriverMobileIdRepository;
 import com.test.taxiservice.taxiservicecommon.repository.DriverSignUpOTPRepository;
+import com.test.taxiservice.taxiservicecommon.service.DriverStatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,9 @@ public class SignUpService implements ISignUpService {
     private IProfileService profileService;
 
     @Autowired
+    private DriverStatusService driverStatusService;
+
+    @Autowired
     private DriverInfoValidator validator;
 
     @Override
@@ -71,6 +76,7 @@ public class SignUpService implements ISignUpService {
             driverProfile.setFirstName(signUpInfo.getFirstName());
             driverProfile.setLastName(signUpInfo.getLastName());
             profileService.addProfile(driverProfile);
+            driverStatusService.updateStatus(credentials.getDriverId(), DriverStatusEnum.PROFILE_UPDATE_IN_PROGRESS);
 
             DriverSignUpOTP driverSignUpOTP = new DriverSignUpOTP(
                     credentials.getMobileNumber(),

@@ -44,8 +44,11 @@ public class DriverBackgroundVerificationService implements IDriverBackgroundVer
     public boolean initiateCheck(BigInteger driverId) throws PersistenceException {
         try {
             if (allDocumentsUploaded(driverId)) {
+                DriverBackgroundVerification driverBackgroundVerification = driverBackgroundStatusRepository.findByDriverId(driverId);
                 log.info("All mandatory documents are uploaded for the drvier : {}", driverId);
-                DriverBackgroundVerification driverBackgroundVerification = new DriverBackgroundVerification();
+                if(driverBackgroundVerification == null) {
+                    driverBackgroundVerification = new DriverBackgroundVerification();
+                }
                 driverBackgroundVerification.setDriverId(driverId);
                 driverBackgroundVerification.setCreatedAt(new Date());
                 driverBackgroundVerification.setModifiedAt(driverBackgroundVerification.getCreatedAt());
@@ -72,12 +75,13 @@ public class DriverBackgroundVerificationService implements IDriverBackgroundVer
 
         DriverBackgroundVerification driverBackgroundVerification = driverBackgroundStatusRepository
                 .findById(externalBGStatusRequest.getVerificationId()).get();
-        if(externalBGStatusRequest.getDocumentsList().isEmpty()) {
+        if(externalBGStatusRequest.getDocumentsList() == null || externalBGStatusRequest.getDocumentsList().isEmpty()) {
             log.info("Background verification is complete for driverId : {} and verificationId : {}",
                     driverBackgroundVerification.getDriverId(),
                     verificationId);
             driverBackgroundVerification.setModifiedAt(new Date());
             driverBackgroundVerification.setStatus(DriverBackgroundStatusEnum.COMPLETED.getValue());
+            driverBackgroundStatusRepository.save(driverBackgroundVerification);
             driverStatusService.updateStatus(driverBackgroundVerification.getDriverId(), DriverStatusEnum.BACKGROUND_VERIFICATION_COMPLETED);
 
         } else {

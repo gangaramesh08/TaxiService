@@ -123,7 +123,7 @@ public class DriverDocumentsValidator {
             error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_NO_DATA);
             return error;
         } else {
-            addErrorForInvalidStatusId(externalBGStatusRequest.getVerificationId(), error);
+            addErrorForInvalidVerificationId(externalBGStatusRequest.getVerificationId(), error);
             addErrorForIncompleteDocumentList(externalBGStatusRequest, error);
         }
         return error;
@@ -137,23 +137,23 @@ public class DriverDocumentsValidator {
             error
                     .addDetailsItem(
                             createErrorDetails(
-                                    ResponseConstants.CODE_ERROR_BADREQUEST_NO_DATA,
-                                    MessageConstants.EMPTY_REQUEST));
-            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_NO_DATA);
+                                    ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_DOCUMENT_LIST,
+                                    MessageConstants.INVALID_DOCUMENT_LIST));
+            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_DOCUMENT_LIST);
         }
     }
 
-    private void addErrorForInvalidStatusId(BigInteger statusId, ErrorInfo error) {
+    private void addErrorForInvalidVerificationId(BigInteger statusId, ErrorInfo error) {
         Optional<DriverBackgroundVerification> statusIdFromDb = driverBackgroundStatusRepository.findById(statusId);
         if(statusIdFromDb.isEmpty()) {
             error
                     .addDetailsItem(
                             createErrorDetails(
-                                    ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_STATUS_ID,
-                                    MessageConstants.INVALID_STATUS_ID
+                                    ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_VERIFICATION_ID,
+                                    MessageConstants.INVALID_VERIFICATION_ID
                             )
                     );
-            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_STATUS_ID);
+            error.setCode(ResponseConstants.CODE_ERROR_BADREQUEST_INVALID_VERIFICATION_ID);
         }
     }
 }

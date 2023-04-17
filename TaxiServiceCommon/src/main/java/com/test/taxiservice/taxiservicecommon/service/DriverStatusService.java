@@ -19,7 +19,10 @@ public class DriverStatusService implements IDriverStatusService {
 
     @Override
     public void updateStatus(BigInteger driverId, DriverStatusEnum backgroundVerificationFailed) {
-        DriverStatus driverStatus = new DriverStatus();
+        DriverStatus driverStatus = driverStatusRepository.findByDriverId(driverId);
+        if(driverStatus == null ){
+            driverStatus = new DriverStatus(new Date());
+        }
         driverStatus.setDriverId(driverId);
         driverStatus.setStatus(backgroundVerificationFailed.name());
         driverStatus.setModifiedAt(new Date());

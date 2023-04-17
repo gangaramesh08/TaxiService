@@ -1,4 +1,4 @@
-package com.test.taxiservice.taxiservicecommon.model.documentservice;
+package com.test.taxiservice.taxiservicecommon.model.trackingservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +13,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "driverStatus")
-public class DriverStatus {
-
+@Entity(name = "DeviceShipmentStatus")
+public class DeviceShipmentStatus {
     @Id
+    @Column(name = "shipmentId")
+    private BigInteger shipmentId;
+
+    @Column(name = "deviceId")
+    private BigInteger deviceStatus;
+
     @Column(name = "driverId")
     private BigInteger driverId;
 
@@ -28,9 +33,4 @@ public class DriverStatus {
 
     @Column(name = "modifiedAt")
     private Date modifiedAt;
-
-    public DriverStatus(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
 }

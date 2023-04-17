@@ -1,10 +1,12 @@
 package com.test.taxiservice.taxiservicecommon.model.loginservice;
 
+import com.test.taxiservice.taxiservicecommon.model.trackingservice.DriverAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +22,6 @@ public class DriverProfileUpdate {
     private Date modifiedAt;
 
     private String email;
+
+    private List<DriverAddress> addressList;
 }
