@@ -8,6 +8,8 @@ import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.taxiservicecommon.model.documentservice.DocumentType;
 import com.test.taxiservice.taxiservicecommon.model.documentservice.DriverDocuments;
+import com.test.taxiservice.taxiservicecommon.model.documentservice.DriverStatusEnum;
+import com.test.taxiservice.taxiservicecommon.service.IDriverStatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +33,9 @@ public class DriverDocService implements IDriverDocService {
 
     @Autowired
     private DriverDocumentsRepository driverDocumentsRepository;
+
+    @Autowired
+    private IDriverStatusService driverStatusService;
 
     @Autowired
     private DriverDocumentsValidator validator;
@@ -65,10 +70,17 @@ public class DriverDocService implements IDriverDocService {
             if(documentId!=null) {
                 driverDocuments.setDocumentId(documentId);
                 log.info("Updated the document for driverId : {}, docType : {}",driverId, documentType);
-
             }
 
             driverDocumentsRepository.save(driverDocuments);
+            long documentsUploadedCount = documentsUploaded(driverId);
+            if(documentsUploadedCount == 1) {
+                driverStatusService.updateStatus(driverId, DriverStatusEnum.DOCUMENT_UPLOAD_INPROGRESS);
+
+            }
+            else if(documentsUploadedCount== 3) {
+                driverStatusService.updateStatus(driverId, DriverStatusEnum.DOCUMENT_UPLOAD_COMPLETE);
+            }
 
 
         } catch (Exception exception) {
@@ -83,5 +95,9 @@ public class DriverDocService implements IDriverDocService {
 
     private BigInteger documentAlreadyExists(BigInteger driverId, String documentType) {
         return driverDocumentsRepository.findByDocumentType(driverId, documentType);
+    }
+
+    private long documentsUploaded(BigInteger driverId) {
+        return driverDocumentsRepository.getDocumentCountByDriverId(driverId);
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.util.concurrent.CompletableFuture;
 
 import static com.test.taxiservice.documentservice.common.Constants.*;
 import static com.test.taxiservice.taxiservicecommon.common.MessageConstants.DOCUMENT_UPLOAD_NOT_COMPLETE;
@@ -59,7 +58,9 @@ public class DriverBackgroundController {
     @PostMapping(UPDATE_DRIVER_BACKGROUND_CHECK_STATUS_URL)
     public ResponseEntity<String> updateBackGroundCheckStatus(@RequestBody ExternalBGStatusRequest externalBGStatusRequest) throws InvalidInputException {
         driverBackgroundStatusService.validateExternalBgRequest(externalBGStatusRequest);
-        CompletableFuture.runAsync(()-> driverBackgroundStatusService.updateStatus(externalBGStatusRequest));
+        new Thread(()->
+            driverBackgroundStatusService.updateStatus(externalBGStatusRequest)
+        ).start();
         log.debug(ACCEPTED_RESPONSE);
 
         return new ResponseEntity<>(SUCCESS,

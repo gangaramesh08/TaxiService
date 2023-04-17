@@ -15,4 +15,8 @@ public interface DriverCredentialsRepository extends JpaRepository<DriverCredent
 
     @Query(value = "Select * from driver_credentials dI where dI.mobile_number = ?1 and dI.password = ?2", nativeQuery = true)
     DriverCredentials getByMobileNumberAndPassword(String mobileNumber, String password);
+
+    @Query(value = "Select * from driver_credentials dC where dC.mobile_number = ?1", nativeQuery = true)
+
+    DriverCredentialsRepository findByMobileNumber(String mobileNumber);
 }

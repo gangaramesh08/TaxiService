@@ -1,5 +1,6 @@
 package com.test.taxiservice.loginservice.controllers;
 
+import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import com.test.taxiservice.loginservice.service.IProfileService;
 import com.test.taxiservice.taxiservicecommon.model.loginservice.DriverProfileUpdate;
@@ -23,7 +24,9 @@ public class ProfileController {
     private IProfileService profileService;
 
     @PostMapping(PROFILE_UPDATE_API_URL)
-    public ResponseEntity<String> updateProfile(@RequestBody DriverProfileUpdate driverProfileUpdate) throws PersistenceException {
+    public ResponseEntity<String> updateProfile(@RequestBody DriverProfileUpdate driverProfileUpdate)
+            throws PersistenceException, InvalidInputException {
+        profileService.validateProfile(driverProfileUpdate);
         profileService.updateProfile(driverProfileUpdate);
         return ResponseEntity.ok("SUCCESS");
 
