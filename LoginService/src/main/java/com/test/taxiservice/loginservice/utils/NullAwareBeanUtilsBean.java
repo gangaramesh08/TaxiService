@@ -18,23 +18,11 @@ public class NullAwareBeanUtilsBean{
         PropertyUtils.describe(parent).entrySet().stream()
                 .filter(e -> e.getValue() != null)
                 .filter(e -> ! e.getKey().equals("class"))
+                .filter(e -> ! e.getKey().equals("addressList"))
+                .filter(e -> ! e.getKey().equals("mobileNumber"))
                 .forEach(e -> {
                     try {
                         PropertyUtils.setProperty(anotherParent, e.getKey(), e.getValue());
-                    } catch (Exception exception) {
-                        log.error("Exception occurred in copying properties");
-                    }
-                });
-    }
-
-    public void copyAddressProperty(DriverProfileUpdate parent, DriverAddress driverAddress)
-            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        PropertyUtils.describe(parent).entrySet().stream()
-                .filter(e -> e.getValue() != null)
-                .filter(e -> e.getKey().equals("addressList"))
-                .forEach(e -> {
-                    try {
-                        PropertyUtils.setProperty(driverAddress, e.getKey(), e.getValue());
                     } catch (Exception exception) {
                         log.error("Exception occurred in copying properties");
                     }

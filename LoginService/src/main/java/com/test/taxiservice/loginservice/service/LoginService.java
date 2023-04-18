@@ -51,7 +51,7 @@ public class LoginService implements ILoginService{
             throw new PersistenceException(validationError);
         }
         if(Objects.isNull(driverCredentials)) {
-            log.error("Incorrect login credentials");
+            log.error("Incorrect login credentials for mobileNumber : {}", mobileNumber);
             ErrorInfo validationError = new ErrorInfo();
             validationError.setMessage(MessageConstants.INVALID_DRIVER_INFO);
             throw new InvalidInputException(validationError);
@@ -60,22 +60,30 @@ public class LoginService implements ILoginService{
     }
 
     @Override
-    public String login(DriverCredentials driverCredentials) {
-        String token = Jwts.builder()
-                .setSubject(String.format("%s",driverCredentials.getMobileNumber()))
-                .setIssuer("TaxiService")
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRY_DURATION))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
+    public String login(DriverCredentials driverCredentials) throws PersistenceException {
+        try {
+            String token = Jwts.builder()
+                    .setSubject(String.format("%s", driverCredentials.getMobileNumber()))
+                    .setIssuer("TaxiService")
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date(System.currentTimeMillis() + EXPIRY_DURATION))
+                    .signWith(SignatureAlgorithm.HS512, secretKey)
+                    .compact();
 
-        DriverAccessToken driverAccessToken = new DriverAccessToken(
-                driverCredentials.getMobileNumber(),
-                BEARER + token,
-                EXPIRY_DURATION);
+            DriverAccessToken driverAccessToken = new DriverAccessToken(
+                    driverCredentials.getMobileNumber(),
+                    BEARER + token,
+                    EXPIRY_DURATION);
 
-        driverAccessTokenRepository.save(driverAccessToken);
-        return token;
+            driverAccessTokenRepository.save(driverAccessToken);
+            return token;
+        } catch (Exception exception) {
+            log.error("Exception occurred while login driverId: {}", driverCredentials.getDriverId());
+            ErrorInfo validationError = ErrorInfo.builder()
+                    .message(MessageConstants.PERSISTENCE_ERROR)
+                    .code(CODE_ERROR_PERSISTENCE_ERROR).build();
+            throw new PersistenceException(validationError);
+        }
 
     }
 }

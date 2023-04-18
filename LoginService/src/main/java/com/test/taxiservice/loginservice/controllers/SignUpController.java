@@ -53,7 +53,7 @@ public class SignUpController {
      * @return
      */
     @GetMapping(value = REGENERATE_OTP_API_URL)
-    public ResponseEntity<Integer> validateOTP(@RequestParam String mobileNumber){
+    public ResponseEntity<Integer> regenerateOtp(@RequestParam String mobileNumber){
         Integer otp = signUpService.regenerateOTP(mobileNumber);
         return ResponseEntity.ok(otp);
     }

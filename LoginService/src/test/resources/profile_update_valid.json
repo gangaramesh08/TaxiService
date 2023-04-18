@@ -1,0 +1,26 @@
+{
+  "mobileNumber" : "9876543210",
+  "age" :35,
+  "email": "amaldev@gmail.com",
+  "addressList":[
+    {
+      "houseNumber" :"23/12",
+      "streetName" : "M G Road",
+      "city" :"Bangalore",
+      "state" : "Karnataka",
+      "country" : "India",
+      "type" : "PERMANENT",
+      "zipCode" : "560000"
+    },
+    {
+      "houseNumber" :"23/12",
+      "streetName" : "M G Road",
+      "city" :"Bangalore",
+      "state" : "Karnataka",
+      "country" : "India",
+      "type" : "CURRENT",
+      "zipCode" : "560000"
+    }
+
+  ]
+}

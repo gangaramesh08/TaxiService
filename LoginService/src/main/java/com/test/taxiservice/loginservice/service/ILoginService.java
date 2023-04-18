@@ -17,5 +17,5 @@ public interface ILoginService {
      */
     void validateLogin(String mobileNumber, String password) throws InvalidInputException, PersistenceException;
 
-    String login(DriverCredentials driverCredentials);
+    String login(DriverCredentials driverCredentials) throws PersistenceException;
 }

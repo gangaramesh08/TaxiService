@@ -1,7 +1,7 @@
 /*
  * © 2021 SAP SE or an SAP affiliate company. All rights reserved.
  */
-package com.test.taxiservice.loginservice.config;
+package com.test.taxiservice.taxiservicecommon.common;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
