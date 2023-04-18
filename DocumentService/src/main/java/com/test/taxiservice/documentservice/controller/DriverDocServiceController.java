@@ -26,6 +26,7 @@ public class DriverDocServiceController {
     /**
      * POST
      * /driver/documentservice/update :
+     *
      * This API is used to upload documents of the driver.
      * Currently, support upload of PAN_CARD, AADHAR_CARD and DRIVING_LICENCE
      * @param file The document to be uploaded

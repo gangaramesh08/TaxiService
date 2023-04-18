@@ -29,8 +29,9 @@ public class DriverBackgroundController {
 
     /**
      * GET
-     * /driver/documentservice/backgroundcheck/initiate:
-     * Initates background Verification process for the driver once all the
+     * /driver/documentservice/backgroundcheck/initiate :
+     *
+     * Initiates background Verification process for the driver once all the
      * necessary documents are uploaded.
      *
      * @param driverId Id that uniquely identifies the driver
@@ -47,7 +48,7 @@ public class DriverBackgroundController {
     }
 
     /**
-     * POST
+     * PUT
      * /driver/documentservice/backgroundcheck/update:
      *
      * @param externalBGStatusRequest Request POJO for updating driver background verification status
@@ -55,7 +56,7 @@ public class DriverBackgroundController {
      * Or Bad Request(status code 400) if the data sent is incorrect or invalid.
      * @throws InvalidInputException
      */
-    @PostMapping(UPDATE_DRIVER_BACKGROUND_CHECK_STATUS_URL)
+    @PutMapping(UPDATE_DRIVER_BACKGROUND_CHECK_STATUS_URL)
     public ResponseEntity<String> updateBackGroundCheckStatus(@RequestBody ExternalBGStatusRequest externalBGStatusRequest) throws InvalidInputException {
         driverBackgroundStatusService.validateExternalBgRequest(externalBGStatusRequest);
         new Thread(()->

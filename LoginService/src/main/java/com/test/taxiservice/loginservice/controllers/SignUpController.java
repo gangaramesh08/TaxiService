@@ -23,6 +23,9 @@ public class SignUpController {
     private ISignUpService signUpService;
 
     /**
+     * POST
+     * /driver/loginservice/signup
+     *
      * Api used for signing up a new driver.
      * @param signUpInfo basic driver information for sign up
      * @return OTP is generated and send to the given mobile number for verification
@@ -37,6 +40,8 @@ public class SignUpController {
     }
 
     /**
+     * GET
+     * /driver/loginservice/validateotp
      * API used for validating the OTP entered by the driver.
      * @param mobileNumber
      * @param otp
@@ -48,6 +53,9 @@ public class SignUpController {
     }
 
     /**
+     * GET
+     * /driver/loginservice/regenerateotp
+     *
      * API used for regenerating the OTP for a given driver mobile Number
      * @param mobileNumber
      * @return

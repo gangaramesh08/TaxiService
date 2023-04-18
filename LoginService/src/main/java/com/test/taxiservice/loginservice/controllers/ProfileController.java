@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.test.taxiservice.loginservice.constants.Constants.LOGINSERVICE_API_URL;
-import static com.test.taxiservice.loginservice.constants.Constants.PROFILE_UPDATE_API_URL;
+import static com.test.taxiservice.loginservice.constants.Constants.*;
 
 @RestController
 @RequestMapping(LOGINSERVICE_API_URL)
@@ -23,12 +22,23 @@ public class ProfileController {
     @Autowired
     private IProfileService profileService;
 
+    /**
+     * POST
+     * /driver/loginservice/profile/update
+     *
+     * API for adding or updating driver profile.
+     *
+     * @param driverProfileUpdate
+     * @return
+     * @throws PersistenceException
+     * @throws InvalidInputException
+     */
     @PostMapping(PROFILE_UPDATE_API_URL)
     public ResponseEntity<String> updateProfile(@RequestBody DriverProfileUpdate driverProfileUpdate)
             throws PersistenceException, InvalidInputException {
         profileService.validateProfile(driverProfileUpdate);
         profileService.updateProfile(driverProfileUpdate);
-        return ResponseEntity.ok("SUCCESS");
+        return ResponseEntity.ok(SUCCESS);
 
     }
 }
