@@ -36,9 +36,6 @@ public class ApiGWLoginServiceController
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Value("${loginservice.host}")
-    private String loginServiceHost;
-
     @Value("${loginservice.login.url}")
     private String loginServiceLoginUrl;
 
