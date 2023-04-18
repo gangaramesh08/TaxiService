@@ -40,6 +40,9 @@ public class DriverProfile {
     @Column(name = "modifiedAt")
     private Date modifiedAt;
 
+    @Column(name = "vehicleId")
+    private BigInteger vehicleId;
+
     private String email;
 
 }
