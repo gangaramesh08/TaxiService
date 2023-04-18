@@ -7,6 +7,7 @@ public class Constants {
 
     }
     public static final String BASE_PACKAGE = "com.test.taxiservice";
+    public static final String COMMON_BASE_PACKAGE = "com.test.taxiservice.taxiservicecommon";
     public static final String NAME_REGEX = "^[a-zA-Z\\\\s]+";
     public static final String MOBILENUMBER_REGEX = "^[1-9][0-9]{9}$";
     public static final String EMAIL_REGEX =  "^(.+)@(\\S+)$";
