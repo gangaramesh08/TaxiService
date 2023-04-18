@@ -68,7 +68,6 @@ public class SignUpService implements ISignUpService {
             credentialsRepository.save(credentials);
 
             driverMobileIdRepository.save(new DriverMobileId(credentials.getMobileNumber(), credentials.getDriverId()));
-
             DriverProfile driverProfile = new DriverProfile();
             driverProfile.setDriverId(credentials.getDriverId());
             driverProfile.setCreatedAt(new Date());

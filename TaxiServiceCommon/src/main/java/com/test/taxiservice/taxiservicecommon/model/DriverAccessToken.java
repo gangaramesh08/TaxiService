@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 
-@RedisHash(value="DriverAccessToken", timeToLive = 86400L )
+@RedisHash(value="DriverAccessToken")
 @AllArgsConstructor
 @Data
 public class DriverAccessToken implements Serializable {
@@ -17,3 +17,5 @@ public class DriverAccessToken implements Serializable {
 
     private long expiry;
 }
+
+

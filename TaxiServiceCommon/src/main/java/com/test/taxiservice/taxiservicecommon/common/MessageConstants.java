@@ -2,6 +2,8 @@ package com.test.taxiservice.taxiservicecommon.common;
 
 public class MessageConstants {
 
+    public static final String BASE_PACKAGE = "com.test.taxiservice";
+
     public static final String INVALID_DRIVER_INFO = "Please check the data entered.";
     public static final String INVALID_REQUEST = "Invalid details provided in the request";
     public static final String EMPTY_REQUEST = "Request cannot be empty";
