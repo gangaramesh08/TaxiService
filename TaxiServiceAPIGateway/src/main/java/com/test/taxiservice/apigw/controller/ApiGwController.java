@@ -3,7 +3,7 @@ package com.test.taxiservice.apigw.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.test.taxiservice.apigw.common.Constants.ApiGWUrl.HEALTH_CHECK;
+import static com.test.taxiservice.apigw.common.Constants.HEALTH_CHECK;
 
 @RestController
 public class ApiGwController {

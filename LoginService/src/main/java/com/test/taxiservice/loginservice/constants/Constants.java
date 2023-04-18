@@ -29,5 +29,5 @@ public class Constants {
     public static final long EXPIRY_DURATION = 24 * 60 * 60 * 1000;
 
     public static final String BEARER = "Bearer ";
-    public static final String SUCCESS = "SUCCESS ";
+    public static final String SUCCESS = "SUCCESS";
 }
