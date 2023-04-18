@@ -30,6 +30,7 @@ public class LoginController {
     /**
      * POST
      * /driver/loginservice/login
+     *
      * Api used for login of driver.
      * @param driverCredentials driverCredentials
      * @return OTP is generated and send to the given mobile number for verification

@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static com.test.taxiservice.apigw.common.Constants.ApiGWUrl.*;
+import static com.test.taxiservice.apigw.common.Constants.*;
 import static com.test.taxiservice.apigw.common.Constants.DRIVER_MOBILE_NUMBER;
 import static com.test.taxiservice.apigw.common.Constants.DRIVER_OTP;
 
 @RestController
-@RequestMapping(Constants.ApiGWUrl.APIGW)
+@RequestMapping(Constants.APIGW)
 public class ApiGWLoginServiceController
 {
     @Autowired
@@ -42,6 +42,14 @@ public class ApiGWLoginServiceController
     @Value("${loginservice.login.url}")
     private String loginServiceLoginUrl;
 
+    /**
+     * POST
+     * /apigw/driver/loginservice/signup
+     *
+     * @param signUpInfo
+     * @return
+     * @throws URISyntaxException
+     */
     @PostMapping(LOGINSERVICE_SIGNUP_URL)
     public ResponseEntity<Integer>  driverSignUp(@RequestBody SignUpInfo signUpInfo) throws URISyntaxException {
         JsonNode requestPayload = objectMapper.convertValue(signUpInfo, JsonNode.class);
@@ -50,6 +58,15 @@ public class ApiGWLoginServiceController
         return restTemplate.exchange(requestEntity, Integer.class);
     }
 
+
+    /**
+     * POST
+     * /apigw/driver/loginservice/login
+     *
+     * @param signUpInfo
+     * @return
+     * @throws URISyntaxException
+     */
     @PostMapping(LOGINSERVICE_LOGIN_URL)
     public ResponseEntity<String>  driverLogin(@RequestBody SignUpInfo signUpInfo) throws URISyntaxException {
             JsonNode requestPayload = objectMapper.convertValue(signUpInfo, JsonNode.class);
@@ -59,6 +76,14 @@ public class ApiGWLoginServiceController
 
     }
 
+    /**
+     * GET
+     * /apigw/driver/loginservice/validateotp
+     *
+     * @param mobileNumber
+     * @param otp
+     * @return
+     */
     @GetMapping(LOGINSERVICE_VALIDATE_OTP_URL)
     public ResponseEntity<Boolean> validateDriverOTP(@RequestParam String mobileNumber, @RequestParam Integer otp){
         URI serviceUri = UriComponentsBuilder.fromHttpUrl(loginServiceLoginUrl + LOGINSERVICE_VALIDATE_OTP_URL)
@@ -71,6 +96,13 @@ public class ApiGWLoginServiceController
 
     }
 
+    /**
+     * GET
+     * /apigw/driver/loginservice/regenerateotp
+     *
+     * @param mobileNumber
+     * @return
+     */
     @GetMapping(LOGINSERVICE_REGENERATE_OTP_URL)
     public ResponseEntity<Integer> regenerateDriverOTP(@RequestParam String mobileNumber){
         URI serviceUri = UriComponentsBuilder.fromHttpUrl(loginServiceLoginUrl + LOGINSERVICE_REGENERATE_OTP_URL)
@@ -82,6 +114,16 @@ public class ApiGWLoginServiceController
 
     }
 
+    /**
+     * POST
+     * /apigw/driver/loginservice/profile/update
+     *
+     * @param request
+     * @param response
+     * @param driverProfileUpdate
+     * @return
+     * @throws URISyntaxException
+     */
     @PostMapping(LOGINSERVICE_PROFILE_UPDATE_URL)
     public ResponseEntity<String>  driverProfileUpdate(
             HttpServletRequest request,
