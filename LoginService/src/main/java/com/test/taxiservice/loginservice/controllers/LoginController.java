@@ -17,7 +17,7 @@ import static com.test.taxiservice.loginservice.constants.Constants.LOGIN_API_UR
 
 /**
  * Apis to perform login of drivers for the Taxi Service. A token is generated during login
- * and is stored in Redis. This token is then used for authentication in all other requests.
+ * and is stored in cache. This token is then used for authentication in all other requests.
  */
 @RestController
 @RequestMapping(LOGINSERVICE_API_URL)
@@ -28,6 +28,8 @@ public class LoginController {
     private ILoginService loginService;
 
     /**
+     * POST
+     * /driver/loginservice/login
      * Api used for login of driver.
      * @param driverCredentials driverCredentials
      * @return OTP is generated and send to the given mobile number for verification
@@ -38,7 +40,6 @@ public class LoginController {
     public ResponseEntity<String> login(@RequestBody DriverCredentials driverCredentials) throws InvalidInputException, PersistenceException {
         loginService.validateLogin(driverCredentials.getMobileNumber(), driverCredentials.getPassword());
         String token = loginService.login(driverCredentials);
-
         return ResponseEntity.ok(token);
     }
 }

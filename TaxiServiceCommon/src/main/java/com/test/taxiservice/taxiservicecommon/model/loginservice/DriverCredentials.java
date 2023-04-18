@@ -34,5 +34,12 @@ public class DriverCredentials {
     @Column(name = "modifiedAt")
     private Date modifiedAt;
 
+    public DriverCredentials(BigInteger driverId, String mobileNumber, String password) {
+        this.driverId = driverId;
+        this.mobileNumber = mobileNumber;
+        this.password = password;
+        this.modifiedAt = new Date();
+    }
+
 
 }

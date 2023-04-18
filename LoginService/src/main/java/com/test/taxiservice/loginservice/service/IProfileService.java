@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public interface IProfileService {
     void updateProfile(DriverProfileUpdate driverProfileUpdate) throws PersistenceException;
 
-    void addProfile(DriverProfile driverProfile);
+    void addProfile(DriverProfile driverProfile) throws PersistenceException;
 
     void validateProfile(DriverProfileUpdate driverProfileUpdate) throws InvalidInputException;
 

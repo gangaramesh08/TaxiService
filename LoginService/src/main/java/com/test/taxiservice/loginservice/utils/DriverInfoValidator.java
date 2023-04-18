@@ -131,7 +131,7 @@ public class DriverInfoValidator {
     }
 
     private void addErrorForInvalidMobileNumber(String mobileNumber, String paramName, ErrorInfo error) {
-        if(driverMobileIdRepository.findById(mobileNumber).isEmpty() ||
+        if(driverMobileIdRepository.findById(mobileNumber).isEmpty() &&
             credentialsRepository.findByMobileNumber(mobileNumber) == null) {
             error
                     .addDetailsItem(
@@ -161,8 +161,14 @@ public class DriverInfoValidator {
                             && e.getZipCode() != null
                             && e.getCountry() != null
                             && e.getState() != null
-                            && (e.getType().equalsIgnoreCase(DriverAddressTypeEnum.PERMANENT.getValue())
-                            || (e.getType().equalsIgnoreCase(DriverAddressTypeEnum.CURRENT.getValue())))).count();
+                            && (e.getType().equalsIgnoreCase(DriverAddressTypeEnum.PERMANENT.getValue()))).distinct().count()
+                    + addressList.stream().filter(e ->
+                    e.getCity() != null
+                            && e.getZipCode() != null
+                            && e.getCountry() != null
+                            && e.getState() != null
+                            && (e.getType().equalsIgnoreCase(DriverAddressTypeEnum.CURRENT.getValue()))).distinct().count();
+
             if(count!=2) {
                 error
                         .addDetailsItem(

@@ -43,9 +43,4 @@ public class TrackingDeviceController {
                 headerInfo.getResponseHeaders(),
                 HttpStatus.ACCEPTED);
     }
-
-    @GetMapping
-    ResponseEntity<String> getShippedDeviceStatus() {
-        return null;
-    }
 }

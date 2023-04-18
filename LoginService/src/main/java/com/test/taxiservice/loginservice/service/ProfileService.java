@@ -79,8 +79,16 @@ public class ProfileService implements IProfileService {
     }
 
     @Override
-    public void addProfile(DriverProfile driverProfile) {
-        driverProfileRepository.save(driverProfile);
+    public void addProfile(DriverProfile driverProfile) throws PersistenceException {
+        try {
+            driverProfileRepository.save(driverProfile);
+        } catch (Exception exception) {
+            log.error("Exception occurred while updating profile driverId: {}", driverProfile.getDriverId());
+            ErrorInfo validationError = ErrorInfo.builder()
+                    .message(MessageConstants.PERSISTENCE_ERROR)
+                    .code(CODE_ERROR_PERSISTENCE_ERROR).build();
+            throw new PersistenceException(validationError);
+        }
     }
 
     @Override
