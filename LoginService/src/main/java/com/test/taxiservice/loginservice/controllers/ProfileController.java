@@ -28,10 +28,10 @@ public class ProfileController {
      *
      * API for adding or updating driver profile.
      *
-     * @param driverProfileUpdate
-     * @return
-     * @throws PersistenceException
-     * @throws InvalidInputException
+     * @param driverProfileUpdate Request POJO to accept profile information
+     * @return Success message (Status Code 200) in case of successful update
+     * @throws PersistenceException when some error occurs in db transactions
+     * @throws InvalidInputException when input is not valid
      */
     @PostMapping(PROFILE_UPDATE_API_URL)
     public ResponseEntity<String> updateProfile(@RequestBody DriverProfileUpdate driverProfileUpdate)

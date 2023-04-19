@@ -43,6 +43,8 @@ public class ApiGWLoginServiceController
      * POST
      * /apigw/driver/loginservice/signup
      *
+     * Api for sign up of driver via API GW
+     *
      * @param signUpInfo
      * @return
      * @throws URISyntaxException
@@ -60,6 +62,8 @@ public class ApiGWLoginServiceController
      * POST
      * /apigw/driver/loginservice/login
      *
+     * Api for login of driver via API GW
+     *
      * @param signUpInfo
      * @return
      * @throws URISyntaxException
@@ -76,6 +80,8 @@ public class ApiGWLoginServiceController
     /**
      * GET
      * /apigw/driver/loginservice/validateotp
+     *
+     * Api for validating otp for a given mobile number
      *
      * @param mobileNumber
      * @param otp
@@ -97,6 +103,8 @@ public class ApiGWLoginServiceController
      * GET
      * /apigw/driver/loginservice/regenerateotp
      *
+     * Api for regenerating otp for a given mobile number
+     *
      * @param mobileNumber
      * @return
      */
@@ -114,6 +122,9 @@ public class ApiGWLoginServiceController
     /**
      * POST
      * /apigw/driver/loginservice/profile/update
+     *
+     * APi for updating driver profile. Only if the token in header is valid, the request
+     * would be forwarded to the loginservice module
      *
      * @param request
      * @param response
