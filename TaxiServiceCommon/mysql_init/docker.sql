@@ -95,11 +95,3 @@ CREATE TABLE `device_shipment_status` (
   CONSTRAINT `driver_id_device_status` FOREIGN KEY (`driver_id`) REFERENCES `driver_credentials` (`driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `device_details` (
-  `device_id` bigint NOT NULL,
-  `driver_id` bigint NOT NULL,
-  `latitude` varchar(50) NOT NULL,
-  `longitude` varchar(50) NOT NULL,
-  PRIMARY KEY (`driver_id`),
-  CONSTRAINT `driver_id_device_details` FOREIGN KEY (`driver_id`) REFERENCES `driver_credentials` (`driver_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

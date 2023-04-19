@@ -23,6 +23,13 @@ public class TrackingDeviceController {
     @Autowired
     private HeaderInfo headerInfo;
 
+    /**
+     * GET
+     * /driver/device/shipment/initiate
+     *
+     * @param driverId ID of the driver to whom the device has to be shipped
+     * @return Success(200)
+     */
     @GetMapping(INITIATE_SHIPMENT)
     ResponseEntity<String> dispatchDevice(@RequestParam BigInteger driverId) {
         if(deviceShipmentService.dispatchDevice(driverId)) {
@@ -32,6 +39,14 @@ public class TrackingDeviceController {
         return ResponseEntity.ok(BACKGROUND_VERIFICATION_NOT_COMPLETE);
     }
 
+    /**
+     * POST
+     * /driver/device/shipment/update
+     *
+     * Api used for posting the status of device shipment.
+     * @param externalShipmentRequest Request POJO to accept status of the device shipment
+     * @return Success message as acknowledgement (status code 202)
+     */
     @PostMapping(UPDATE_SHIPMENT_STATUS)
     ResponseEntity<String> updateShipmentStatus(@RequestBody ExternalShipmentRequest externalShipmentRequest) {
         deviceShipmentService.validateExternalShipmentRequest(externalShipmentRequest);

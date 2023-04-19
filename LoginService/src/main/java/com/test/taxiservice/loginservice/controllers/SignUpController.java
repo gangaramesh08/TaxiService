@@ -45,7 +45,7 @@ public class SignUpController {
      * API used for validating the OTP entered by the driver.
      * @param mobileNumber
      * @param otp
-     * @return
+     * @return Boolean value to indicate if otp is valid or not
      */
     @GetMapping(value = VALIDATE_OTP_API_URL)
     public ResponseEntity<Boolean> validateOTP(@RequestParam String mobileNumber, @RequestParam Integer otp){
@@ -58,7 +58,7 @@ public class SignUpController {
      *
      * API used for regenerating the OTP for a given driver mobile Number
      * @param mobileNumber
-     * @return
+     * @return OTP is generated and send to the given mobile number for verification
      */
     @GetMapping(value = REGENERATE_OTP_API_URL)
     public ResponseEntity<Integer> regenerateOtp(@RequestParam String mobileNumber){
