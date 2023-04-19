@@ -3,7 +3,6 @@ version: "3.0"
 services:
 
   login-service:
-    container_name: login-service
     restart: on-failure
     build: ./
     networks:
@@ -12,7 +11,7 @@ services:
     expose:
       - "8082"
     ports:
-      - 8082:8082
+      - 8082-8085:8082
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db-mysql:3306/TaxiService?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
       REDIS_HOST: 127.0.0.1

@@ -1,8 +1,8 @@
 package com.test.taxiservice.documentservice.controller;
 
-import com.test.taxiservice.documentservice.common.HeaderInfo;
 import com.test.taxiservice.documentservice.model.ExternalBGStatusRequest;
 import com.test.taxiservice.documentservice.service.IDriverBackgroundVerificationService;
+import com.test.taxiservice.taxiservicecommon.common.HeaderInfo;
 import com.test.taxiservice.taxiservicecommon.exception.InvalidInputException;
 import com.test.taxiservice.taxiservicecommon.exception.PersistenceException;
 import lombok.extern.slf4j.Slf4j;
