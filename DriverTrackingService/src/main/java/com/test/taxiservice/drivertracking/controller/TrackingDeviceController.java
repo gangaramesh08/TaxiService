@@ -1,8 +1,8 @@
 package com.test.taxiservice.drivertracking.controller;
 
-import com.test.taxiservice.drivertracking.common.HeaderInfo;
 import com.test.taxiservice.drivertracking.model.ExternalShipmentRequest;
 import com.test.taxiservice.drivertracking.service.IDeviceShipmentService;
+import com.test.taxiservice.taxiservicecommon.common.HeaderInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

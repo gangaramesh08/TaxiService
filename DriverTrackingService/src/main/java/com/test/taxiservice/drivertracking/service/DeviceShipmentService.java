@@ -10,11 +10,13 @@ import com.test.taxiservice.taxiservicecommon.service.IDeviceService;
 import com.test.taxiservice.taxiservicecommon.service.IDriverStatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Optional;
 
+@Service
 @Slf4j
 public class DeviceShipmentService implements IDeviceShipmentService {
 
@@ -39,16 +41,8 @@ public class DeviceShipmentService implements IDeviceShipmentService {
         if(backgroundVerificationComplete(driverId)) {
             log.info("Background verification is complete for driverId : {}", driverId);
             externalDeviceShipmentService.initiateShipment(driverId);
-            DeviceShipmentStatus deviceShipmentStatus = deviceStatusRepository.findByDriverId(driverId);
-            if(deviceShipmentStatus == null ) {
-                deviceShipmentStatus = new DeviceShipmentStatus();
-                deviceShipmentStatus.setCreatedAt(new Date());
-            }
-            deviceShipmentStatus.setDriverId(driverId);
-            deviceShipmentStatus.setModifiedAt(new Date());
-            deviceShipmentStatus.setStatus(DeviceStatusEnum.INPROGRESS.getValue());
-            deviceStatusRepository.save(deviceShipmentStatus);
             driverStatusService.updateStatus(driverId, DriverStatusEnum.DEVICE_SHIPMENT_INPROGRESS);
+            return true;
 
         }
         return false;
